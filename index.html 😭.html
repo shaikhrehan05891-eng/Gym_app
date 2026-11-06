@@ -1,0 +1,189 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0b0f"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+<title>Gym</title>
+<style>
+:root{--bg:#0b0b0f;--cd:#16171d;--cd2:#1f2129;--tx:#f4f4f6;--mu:#8b8e99;--ac:#ff3b3b;--ok:#2ecc71;--go:#f5b301;--bd:#262833}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--tx);padding-bottom:90px}
+.w{max-width:520px;margin:auto;padding:18px 16px}
+.c,.s{background:var(--cd);border:1px solid var(--bd);border-radius:18px;padding:16px;margin-bottom:12px;animation:up .35s ease both}
+@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+input,select{width:100%;padding:13px;margin:5px 0;border:1px solid var(--bd);border-radius:12px;background:var(--cd2);color:var(--tx);font-size:16px}
+button{padding:11px 15px;border:0;border-radius:12px;background:var(--ac);color:#fff;font-size:14px;font-weight:600;margin:3px 4px 3px 0}
+button.g{background:var(--cd2);color:var(--tx)}button.ok{background:#1f8f55}button:disabled{opacity:.5}
+.mu{color:var(--mu);font-size:13px}.r{color:#ff6b6b}.o{color:var(--ok)}.go{color:var(--go)}
+.hd{display:flex;align-items:center;gap:12px;margin-bottom:16px}.lg{font-size:32px}.lg img{height:42px;border-radius:10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.grid .s{margin:0}.s b{display:block;font-size:26px;margin-top:4px}
+nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:var(--cd);border-top:1px solid var(--bd);padding:6px 0 calc(6px + env(safe-area-inset-bottom,0px))}
+nav a{flex:1;text-align:center;font-size:11px;color:var(--mu);padding:6px}nav a.on{color:var(--ac);font-weight:700}nav a span{display:block;font-size:21px}
+.t{display:flex;gap:6px;margin:8px 0}.t button{flex:1;margin:0}h3{margin:18px 0 10px;font-size:16px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}.cen{text-align:center}.big{font-size:42px;font-weight:800}
+@media print{body *{visibility:hidden}#qrc,#qrc *{visibility:visible}#qrc{position:absolute;left:0;top:0;width:100%;background:#fff;color:#000}}
+body{background:radial-gradient(900px 500px at 85% -10%,rgba(255,59,59,.22),transparent 60%),radial-gradient(700px 500px at -10% 30%,rgba(245,179,1,.10),transparent 60%),#0b0b0f;background-attachment:fixed}
+.c,.s{background:linear-gradient(145deg,#1a1b22,#14151a);box-shadow:0 8px 24px rgba(0,0,0,.35)}
+button{background:linear-gradient(135deg,var(--ac),#ff7a45);box-shadow:0 6px 16px rgba(255,59,59,.3);transition:transform .15s}
+button:active{transform:scale(.95)}button.g{background:var(--cd2);box-shadow:none}button.ok{background:linear-gradient(135deg,#1f8f55,#2ecc71);box-shadow:0 6px 16px rgba(46,204,113,.25)}
+.hero{border-radius:22px;padding:20px;margin-bottom:14px;background:linear-gradient(135deg,var(--ac),#ff7a45 60%,#f5b301);color:#fff;position:relative;overflow:hidden;animation:up .4s ease both;box-shadow:0 12px 30px rgba(255,59,59,.3)}
+.hero:after{content:"";position:absolute;right:-30px;top:-30px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.15)}
+.hero h2{margin:0 0 4px;font-size:22px}.hero .q{opacity:.92;font-size:13px;margin-top:8px}.hero .n{font-size:48px;font-weight:800;line-height:1.1}
+.avt{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px;color:#fff;flex:none}
+.pill{display:inline-block;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:700}
+.pill.o{background:rgba(46,204,113,.15)}.pill.r{background:rgba(255,107,107,.15)}.pill.go{background:rgba(245,179,1,.15)}
+.bar{height:6px;border-radius:9px;background:var(--cd2);margin:10px 0 6px;overflow:hidden}.bar i{display:block;height:100%;border-radius:9px;animation:gr 1s ease both}
+@keyframes gr{from{width:0}}
+.s{position:relative;overflow:hidden}.s .ic{position:absolute;right:12px;top:10px;font-size:26px}
+nav{left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom,0px));border-radius:22px;border:1px solid var(--bd);backdrop-filter:blur(14px);background:rgba(22,23,29,.9);padding:6px 0}
+nav a span{transition:.2s}nav a.on span{transform:translateY(-3px) scale(1.18)}
+@keyframes pu{0%,100%{transform:scale(1)}50%{transform:scale(1.09)}}.pl{animation:pu 2.4s ease-in-out infinite;display:inline-block}
+.cf{position:fixed;top:-14px;width:9px;height:14px;z-index:99;animation:fall 2.4s linear forwards}
+@keyframes fall{to{transform:translateY(105vh) rotate(720deg)}}
+</style></head><body><div class="w" id="app"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {getAuth,signInWithEmailAndPassword,createUserWithEmailAndPassword,signOut,onAuthStateChanged,updatePassword} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {getFirestore,doc,setDoc,getDoc,updateDoc,deleteDoc,addDoc,collection,getDocs,query,where} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+/* ===== NAYE CLIENT KE LIYE SIRF YE 2 BLOCK BADLO ===== */
+const BRAND={name:"Dp's GYM",tag:"Stronger every day",logo:"🏋️",accent:"#ff3b3b",admin:"faizanshaikh3785@gmail.com",cc:"91"};
+const cfg={
+ apiKey:"AIzaSyBP4ZpmshodhuiAKHpgSntnobvp_f5pLmk",
+ authDomain:"dp-s-gym.firebaseapp.com",
+ projectId:"dp-s-gym",
+ storageBucket:"dp-s-gym.firebasestorage.app",
+ messagingSenderId:"441221044969",
+ appId:"1:441221044969:web:92a67132f2ba4ef5ea6e78"
+};
+/* ===== YAHAN SE NEECHE KUCH NAHI BADALNA ===== */
+const ADMIN=BRAND.admin;
+document.title=BRAND.name;document.documentElement.style.setProperty("--ac",BRAND.accent);
+{const ic="data:image/svg+xml,"+encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='#0b0b0f'/><text x='50' y='68' font-size='56' text-anchor='middle'>${BRAND.logo.length<5?BRAND.logo:"🏋️"}</text></svg>`);
+ const l=document.createElement("link");l.rel="manifest";l.href="data:application/manifest+json,"+encodeURIComponent(JSON.stringify({name:BRAND.name,short_name:BRAND.name,start_url:location.pathname,display:"standalone",background_color:"#0b0b0f",theme_color:"#0b0b0f",icons:[{src:ic,sizes:"any",type:"image/svg+xml",purpose:"any"}]}));document.head.appendChild(l)}
+const app=initializeApp(cfg),auth=getAuth(app),db=getFirestore(app);
+const auth2=getAuth(initializeApp(cfg,"second"));
+const $=s=>document.querySelector(s),A=$("#app");
+const ymd=d=>{const z=new Date(d.getTime()-d.getTimezoneOffset()*6e4);return z.toISOString().slice(0,10)};
+const today=()=>ymd(new Date()),addD=(s,n)=>{const d=new Date(s+"T12:00");d.setDate(d.getDate()+n);return ymd(d)};
+const diff=s=>Math.round((new Date(s+"T12:00")-new Date(today()+"T12:00"))/864e5);
+const mail=(p,r=0)=>p.replace(/\D/g,"")+(r?".r"+r:"")+"@gym.app",pw=p=>p+"@gym";
+const logo=()=>`<div class="lg">${/^(http|data:)/.test(BRAND.logo)?`<img src="${BRAND.logo}">`:BRAND.logo}</div>`;
+const head=sub=>`<div class="hd">${logo()}<div><b style="font-size:19px">${BRAND.name}</b><div class="mu">${sub}</div></div></div>`;
+const L=()=>A.innerHTML="<p class='mu'>Loading...</p>";
+const greet=()=>{const h=new Date().getHours();return h<12?"Good morning":h<17?"Good afternoon":"Good evening"};
+const quote=()=>["Aaj ka pasina, kal ki taaqat 💪","Excuses nahi, reps gino 🔥","Chhota step bhi step hai 🚀","Discipline > Motivation ⚡","Body wahi banti hai jo roz karte ho 🏆"][new Date().getDate()%5];
+const AV=["#ff3b3b","#f5b301","#2ecc71","#3b82f6","#a855f7","#ec4899"];
+const av=n=>`<div class="avt" style="background:${AV[(n.charCodeAt(0)+n.length)%6]}">${n[0].toUpperCase()}</div>`;
+const confetti=()=>{for(let i=0;i<40;i++){const d=document.createElement("i");d.className="cf";d.style.cssText=`left:${Math.random()*100}vw;background:${AV[i%6]};animation-delay:${Math.random()*.6}s`;document.body.appendChild(d);setTimeout(()=>d.remove(),3300)}};
+let mode=location.hash=="#admin"?"admin":"member",view="home",members=[],att=[],pays=[],tab="all",sq="",qrCode="";
+window.setMode=m=>{mode=m;login()};
+function login(msg=""){const adm=location.hash=="#admin";if(!adm)mode="member";
+ A.innerHTML=`<div class="cen" style="padding-top:30px"><div style="font-size:64px"><span class="pl">${/^(http|data:)/.test(BRAND.logo)?`<img src="${BRAND.logo}" style="height:80px;border-radius:16px">`:BRAND.logo}</span></div><h2 style="margin:8px 0 2px">${BRAND.name}</h2><div class="mu" style="margin-bottom:22px">${BRAND.tag}</div></div>
+ ${adm?`<div class="t"><button class="${mode=="member"?"":"g"}" onclick="setMode('member')">Member</button><button class="${mode=="admin"?"":"g"}" onclick="setMode('admin')">Admin</button></div>`:""}
+ <div class="c">${mode=="admin"?`<input id="u" type="email" placeholder="Admin email" value="${ADMIN}"><input id="p" type="password" placeholder="Password">`:`<input id="u" type="tel" placeholder="Phone number"><input id="p" type="password" inputmode="numeric" placeholder="PIN">`}
+ <button style="width:100%;padding:14px;margin-top:8px" onclick="doLogin()">Login</button><div class="r" style="margin-top:8px">${msg}</div></div>`}
+window.doLogin=async()=>{const u=$("#u").value.trim(),p=$("#p").value;
+ try{if(mode=="admin")await signInWithEmailAndPassword(auth,u,p);
+  else{for(let i=0;i<4;i++){try{return await signInWithEmailAndPassword(auth,mail(u,i),pw(p))}catch(e){if(e.code=="auth/too-many-requests"||e.code=="auth/network-request-failed")throw e}}throw{code:"x"}}}
+ catch(e){login(e.code=="auth/too-many-requests"?"Bahut baar galat try kiya, thodi der baad try karo":e.code=="auth/network-request-failed"?"Internet check karo":"Phone/PIN galat hai ya account nahi hai")}};
+window.logout=()=>signOut(auth);
+addEventListener("hashchange",()=>{if(!auth.currentUser){mode=location.hash=="#admin"?"admin":"member";login()}});
+onAuthStateChanged(auth,async u=>{
+ if(!u)return login();L();
+ try{if(u.email===ADMIN)await admin();else await member(u.uid)}
+ catch(e){A.innerHTML="<p class='r'>Kuch gadbad hui. Internet check karke refresh karo.</p><button onclick='logout()'>Logout</button>"}
+});
+const ring=(d,ex)=>{const f=Math.max(0,Math.min(d,30))/30,c=ex?"#ff3b3b":d<=3?"#f5b301":"#2ecc71";
+ return `<svg width="150" height="150" viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="#262833" stroke-width="10"/><circle cx="60" cy="60" r="52" fill="none" stroke="${c}" stroke-width="10" stroke-linecap="round" stroke-dasharray="${f*326.7} 326.7" transform="rotate(-90 60 60)"/><text x="60" y="60" text-anchor="middle" fill="#f4f4f6" font-size="28" font-weight="700">${ex?0:d}</text><text x="60" y="78" text-anchor="middle" fill="#8b8e99" font-size="10">din baaki</text></svg>`};
+async function checkin(uid,m){const s=m.lastCheckin===addD(today(),-1)?(m.streak||0)+1:1;
+ await updateDoc(doc(db,"members",uid),{streak:s,lastCheckin:today()});
+ await setDoc(doc(db,"attendance",today()+"_"+uid),{uid,name:m.name,date:today(),time:new Date().toTimeString().slice(0,5)});
+ return{...m,streak:s,lastCheckin:today()}}
+async function member(uid){
+ const r=await getDoc(doc(db,"members",uid));
+ if(!r.exists())return A.innerHTML="<p>Account nahi mila. Gym se sampark karo.</p><button onclick='logout()'>Logout</button>";
+ let m=r.data(),note="";const c=new URLSearchParams(location.search).get("c");
+ if(c){const q=await getDoc(doc(db,"settings","qr"));
+  if(!q.exists()||q.data().code!==c)note="❌ Ye QR purana hai. Gym ka naya QR scan karo.";
+  else if(diff(m.expiry)<0)note="⚠️ Membership expire ho gayi. Pehle fee jama karo.";
+  else if(m.lastCheckin===today())note="✅ Aaj ka check-in ho chuka hai.";
+  else{m=await checkin(uid,m);note="✅ Check-in ho gaya! Keep going 💪"}
+  history.replaceState(null,"",location.pathname)}
+ const d=diff(m.expiry),ex=d<0,st=m.streak||0;
+ const [as,ps]=await Promise.all([getDocs(query(collection(db,"attendance"),where("uid","==",uid))),getDocs(query(collection(db,"payments"),where("uid","==",uid)))]);
+ const days=new Set(as.docs.map(x=>x.data().date)),pl=ps.docs.map(x=>x.data()).sort((a,b)=>b.date.localeCompare(a.date)).slice(0,5);
+ const ym=today().slice(0,7),dim=new Date(+ym.slice(0,4),+ym.slice(5),0).getDate(),fd=new Date(ym+"-01T12:00").getDay(),mc=[...days].filter(x=>x.startsWith(ym)).length;
+ const cal=`<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;text-align:center;font-size:12px">${["S","M","T","W","T","F","S"].map(x=>`<span class="mu">${x}</span>`).join("")}${"<span></span>".repeat(fd)}${Array.from({length:dim},(_,i)=>{const dt=ym+"-"+String(i+1).padStart(2,"0"),on=days.has(dt);return`<span style="padding:7px 0;border-radius:8px;background:${on?"var(--ok)":"var(--cd2)"};color:${on?"#000":"var(--mu)"}">${i+1}</span>`}).join("")}</div>`;
+ A.innerHTML=`${head("Member")}<div class="hero"><h2>${greet()}, ${m.name.split(" ")[0]} 👋</h2><div class="q">${quote()}</div></div>${note?`<div class="c"><b>${note}</b></div>`:""}
+ <div class="c cen">${ring(d,ex)}<div class="${ex?"r":d<=3?"go":"o"}" style="font-weight:600">${ex?"Membership expired, fee jama karo":d<=3?"Jaldi renew karo":"Membership active"}</div><div class="mu">Expiry: ${m.expiry}</div>${d<=3?`<div class="mu">Fee: ₹${m.fee||0}</div>`:""}</div>
+ <div class="c cen"><div class="mu">Streak</div><div class="big">🔥 ${st}</div><div class="mu">din lagatar ${st>=30?"🏆":st>=7?"⭐":""}${m.lastCheckin===today()?" · aaj check-in done":""}</div></div>
+ <div class="c"><div class="row"><b>📅 Is mahine</b><span class="o">${mc} din aaye</span></div><div style="margin-top:10px">${cal}</div></div>
+ ${pl.length?`<div class="c"><b>💰 Payments</b>${pl.map(p=>`<div class="row" style="margin-top:8px"><span class="mu">${p.date} · ${p.mode}</span><b>₹${p.amount}</b></div>`).join("")}</div>`:""}
+ <div class="mu cen">Check-in ke liye gym ka QR scan karo</div><div class="cen" style="margin-top:12px"><button class="g" onclick="cp()">PIN badlo</button><button class="g" onclick="logout()">Logout</button></div>`;if(note.startsWith("✅ Check-in ho gaya"))confetti()}
+async function newQR(){qrCode=Math.random().toString(36).slice(2,10);await setDoc(doc(db,"settings","qr"),{code:qrCode})}
+async function admin(){
+ const [ms,qd,as,ps]=await Promise.all([getDocs(collection(db,"members")),getDoc(doc(db,"settings","qr")),
+  getDocs(query(collection(db,"attendance"),where("date","==",today()))),
+  getDocs(query(collection(db,"payments"),where("date",">=",today().slice(0,8)+"01")))]);
+ members=ms.docs.map(x=>({id:x.id,...x.data()}));att=as.docs.map(x=>x.data()).sort((a,b)=>b.time.localeCompare(a.time));pays=ps.docs.map(x=>x.data());
+ if(qd.exists())qrCode=qd.data().code;else await newQR();draw()}
+function draw(){A.innerHTML=`${head("Admin")}<div id="v"></div><nav>${[["home","🏠","Home"],["mem","👥","Members"],["att","✅","Aaj"],["qr","📱","QR"]].map(n=>`<a class="${view==n[0]?"on":""}" onclick="go('${n[0]}')"><span>${n[1]}</span>${n[2]}</a>`).join("")}</nav>`;show()}
+window.go=v=>{view=v;draw()};
+const stat=m=>{const d=diff(m.expiry);return`<span class="${d<0?"r":d<=3?"go":"o"}">${d<0?`Expired ${-d} din pehle`:`${d} din baaki`}</span>`};
+function show(){const v=$("#v");
+ if(view=="home"){const act=members.filter(m=>diff(m.expiry)>=0).length,rev=pays.reduce((a,p)=>a+(+p.amount||0),0),
+  due=members.filter(m=>diff(m.expiry)<=3).sort((a,b)=>a.expiry.localeCompare(b.expiry)).slice(0,8);
+  v.innerHTML=`<div class="hero"><div style="opacity:.92">${greet()}, Admin 👋</div><div class="n">${att.length}</div><div>log aaj gym aaye</div><div class="q">${quote()}</div></div>
+  <div class="grid"><div class="s"><span class="ic">💰</span><span class="mu">Is mahine kamai</span><b>₹${rev}</b></div><div class="s"><span class="ic">💪</span><span class="mu">Active</span><b class="o">${act}</b></div><div class="s"><span class="ic">⚠️</span><span class="mu">Expired</span><b class="r">${members.length-act}</b></div><div class="s"><span class="ic">👥</span><span class="mu">Total members</span><b>${members.length}</b></div></div>
+  <button id="rb" style="width:100%;margin-top:12px" onclick="rem()">📲 Sab ko reminder bhejo</button><h3>⏰ Fee due / expired</h3>${due.map(m=>`<div class="c row"><div style="display:flex;gap:12px;align-items:center">${av(m.name)}<div><b>${m.name}</b><div class="mu">${stat(m)} · ₹${m.fee||0}</div></div></div><button class="ok" onclick="wa('${m.id}')">Remind</button></div>`).join("")||"<div class='c mu'>Sab theek hai 🎉</div>"}<h3>💰 Recent payments</h3>${pays.slice().sort((a,b)=>b.date.localeCompare(a.date)).slice(0,8).map(p=>`<div class="c row"><div><b>${p.name}</b><div class="mu">${p.date} · ${p.mode} · ${p.months} mahina</div></div><b class="o">₹${p.amount}</b></div>`).join("")||"<div class='c mu'>Abhi koi payment nahi</div>"}`}
+ if(view=="mem"){v.innerHTML=`<div class="row"><h3 style="margin:0">Members (${members.length})</h3><button onclick="tf()">+ Naya</button></div>
+  <div class="c" id="af" style="display:none;margin-top:10px"><input id="n" placeholder="Naam"><input id="ph" type="tel" placeholder="Phone (10 digit)"><input id="pn" inputmode="numeric" placeholder="PIN (4 digit)"><input id="fe" type="number" placeholder="Monthly fee ₹">
+  <select id="mo"><option value="1">1 mahina</option><option value="3">3 mahine</option><option value="6">6 mahine</option><option value="12">12 mahine</option></select><select id="md"><option>Cash</option><option>UPI</option></select><button onclick="addM()">Add member</button><div id="msg" class="r"></div></div>
+  <div class="t" id="tabs"></div><input id="sr" placeholder="🔍 Naam ya phone" value="${sq}" oninput="sq=this.value;list()"><div id="list"></div>`;list()}
+ if(view=="att"){v.innerHTML=`<h3>Aaj ki attendance (${att.length})</h3>${att.map(a=>`<div class="c row"><div style="display:flex;gap:12px;align-items:center">${av(a.name)}<b>${a.name}</b></div><span class="pill o">${a.time}</span></div>`).join("")||"<div class='c mu'>Abhi tak koi nahi aaya</div>"}`}
+ if(view=="qr"){v.innerHTML=`<div class="c cen" id="qrc"><h2 style="margin:0">${BRAND.name}</h2><div class="mu" style="margin-bottom:12px">Scan karo aur check-in karo</div><div id="qr" style="background:#fff;padding:10px;display:inline-block;border-radius:12px"></div></div>
+  <button onclick="print()">Print QR</button><button class="g" onclick="nq()">Naya QR banao</button><button class="g" onclick="bk()">Backup (CSV)</button><button class="g" onclick="logout()">Logout</button>`;
+  new QRCode($("#qr"),{text:location.origin+location.pathname+"?c="+qrCode,width:200,height:200})}}
+function list(){
+ const soon=members.filter(m=>diff(m.expiry)>=0&&diff(m.expiry)<=3).length;
+ $("#tabs").innerHTML=[["all","All"],["soon","Due soon ("+soon+")"],["red","🔴 Red list"]].map(t=>`<button class="${tab==t[0]?"":"g"}" onclick="tb('${t[0]}')">${t[1]}</button>`).join("");
+ const k=sq.trim().toLowerCase();
+ const f=members.filter(m=>(tab=="red"?diff(m.expiry)<0:tab=="soon"?diff(m.expiry)>=0&&diff(m.expiry)<=3:true)&&(!k||m.name.toLowerCase().includes(k)||m.phone.includes(k))).sort((a,b)=>a.expiry.localeCompare(b.expiry));
+ $("#list").innerHTML=f.map(m=>`<div class="c"><div class="row" style="justify-content:flex-start;gap:12px">${av(m.name)}<div style="flex:1"><b>${m.name}</b><div class="mu">${m.phone}</div></div><span class="pill ${diff(m.expiry)<0?"r":diff(m.expiry)<=3?"go":"o"}">${diff(m.expiry)<0?"Expired":diff(m.expiry)<=3?"Due soon":"Active"}</span></div><div class="bar"><i style="width:${Math.max(4,Math.min(100,diff(m.expiry)/30*100))}%;background:${diff(m.expiry)<0?"#ff6b6b":diff(m.expiry)<=3?"#f5b301":"#2ecc71"}"></i></div><div>${stat(m)} <span class="mu">· ${m.expiry} · ₹${m.fee||0} · 🔥${m.streak||0}</span></div>
+ <select id="pm${m.id}" style="width:auto;padding:8px;margin:8px 0 4px"><option>Cash</option><option>UPI</option></select><br>
+ <button class="ok" onclick="renew('${m.id}',1)">+1 mahina</button><button class="ok" onclick="renew('${m.id}',3)">+3 mahine</button><button class="g" onclick="wa('${m.id}')">WhatsApp</button><button class="g" onclick="ed('${m.id}')">Edit</button><button class="g" onclick="rp('${m.id}')">Reset PIN</button><button class="g" onclick="del('${m.id}')">Delete</button></div>`).join("")||"<p class='mu'>Koi member nahi</p>"}
+window.tb=t=>{tab=t;list()};
+const ERR={"auth/weak-password":"PIN kam se kam 4 digit ka ho","auth/network-request-failed":"Internet check karo","permission-denied":"Permission nahi hai, Firestore rules check karo"};
+window.addM=async()=>{const n=$("#n").value.trim(),ph=$("#ph").value.replace(/\D/g,"").slice(-10),pn=$("#pn").value.trim(),fe=+$("#fe").value||0,mo=+$("#mo").value,md=$("#md").value;
+ const M=t=>$("#msg").textContent=t;
+ if(!n||ph.length!=10||pn.length<4)return M("Naam, 10 digit phone aur 4+ digit PIN do");
+ if(members.some(m=>m.phone==ph))return M("Ye phone number pehle se hai");
+ M("Add ho raha hai...");
+ try{let uid;
+  try{uid=(await createUserWithEmailAndPassword(auth2,mail(ph),pw(pn))).user.uid}
+  catch(e){if(e.code=="auth/email-already-in-use")uid=(await signInWithEmailAndPassword(auth2,mail(ph),pw(pn))).user.uid;else throw e}
+  await signOut(auth2);
+  await setDoc(doc(db,"members",uid),{name:n,phone:ph,fee:fe,expiry:addD(today(),30*mo),joined:today(),streak:0,lastCheckin:""});
+  await addDoc(collection(db,"payments"),{uid,name:n,amount:fe*mo,mode:md,months:mo,date:today()});admin()}
+ catch(e){M(e.code=="auth/invalid-credential"?"Ye number pehle kisi aur PIN se bana tha. Firebase > Authentication se purana user delete karo.":ERR[e.code]||"Error: "+(e.code||e.message))}};
+window.renew=async(id,n)=>{const m=members.find(x=>x.id==id),md=$("#pm"+id).value;const base=diff(m.expiry)<0?today():m.expiry;
+ m.expiry=addD(base,30*n);await updateDoc(doc(db,"members",id),{expiry:m.expiry});
+ const p={uid:id,name:m.name,amount:(m.fee||0)*n,mode:md,months:n,date:today()};await addDoc(collection(db,"payments"),p);pays.push(p);list()};
+window.ed=async id=>{const m=members.find(x=>x.id==id);const n=prompt("Naam",m.name);if(n===null)return;const f=prompt("Monthly fee ₹",m.fee||0);if(f===null)return;
+ m.name=n.trim()||m.name;m.fee=+f||0;await updateDoc(doc(db,"members",id),{name:m.name,fee:m.fee});list()};
+window.del=async id=>{const m=members.find(x=>x.id==id);if(confirm(m.name+" ko delete karein?")){await deleteDoc(doc(db,"members",id));members=members.filter(x=>x.id!=id);list()}};
+window.nq=async()=>{if(confirm("Naya QR banane par purana print kiya QR band ho jayega. Pakka?")){await newQR();show()}};
+window.wa=id=>{const m=members.find(x=>x.id==id),d=diff(m.expiry);
+ const t=d<0?`Hi ${m.name}, aapki gym membership ${m.expiry} ko expire ho gayi hai. Fee ₹${m.fee} jama karein. - ${BRAND.name}`:`Hi ${m.name}, aapki gym membership ${m.expiry} ko expire hogi. Fee ₹${m.fee} time par jama karein. - ${BRAND.name}`;
+ open(`https://wa.me/${BRAND.cc}${m.phone}?text=${encodeURIComponent(t)}`)};
+window.tf=()=>{const f=$("#af");f.style.display=f.style.display=="none"?"block":"none"};
+let rq=[];
+window.rem=()=>{if(!rq.length)rq=members.filter(m=>diff(m.expiry)<=3).map(m=>m.id);const id=rq.shift();if(id)wa(id);const b=$("#rb");if(b)b.textContent=rq.length?`Agla reminder (${rq.length} baaki) →`:"Sab ho gaye ✅"};
+window.bk=()=>{const r=["Naam,Phone,Fee,Expiry,Joined,Streak",...members.map(m=>[m.name,m.phone,m.fee||0,m.expiry,m.joined||"",m.streak||0].join(","))].join("\n");const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([r],{type:"text/csv"}));a.download="members.csv";a.click()};
+window.rp=async id=>{const m=members.find(x=>x.id==id),pn=prompt("Naya PIN (4 digit)");if(!pn)return;if(pn.length<4)return alert("PIN kam se kam 4 digit ka ho");
+ const rv=(m.rv||0)+1;if(rv>3)return alert("Reset limit (3) poori ho gayi. Firebase > Authentication se ye user delete karo aur naya member add karo.");
+ try{const c=await createUserWithEmailAndPassword(auth2,mail(m.phone,rv),pw(pn));await signOut(auth2);
+  const data={...m};delete data.id;await setDoc(doc(db,"members",c.user.uid),{...data,rv});await deleteDoc(doc(db,"members",id));alert("PIN reset ho gaya ✅");admin()}
+ catch(e){alert("Error: "+(e.code||e.message))}};
+window.cp=async()=>{const n=prompt("Naya PIN (4 digit)");if(!n)return;if(n.length<4)return alert("PIN kam se kam 4 digit ka ho");
+ try{await updatePassword(auth.currentUser,pw(n));alert("PIN badal gaya ✅")}catch(e){alert(e.code=="auth/requires-recent-login"?"Logout karke dobara login karo, phir PIN badlo":"Error: "+(e.code||e.message))}};
+</script></body></html>
