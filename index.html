@@ -186,4 +186,4 @@ window.rp=async id=>{const m=members.find(x=>x.id==id),pn=prompt("Naya PIN (4 di
  catch(e){alert("Error: "+(e.code||e.message))}};
 window.cp=async()=>{const n=prompt("Naya PIN (4 digit)");if(!n)return;if(n.length<4)return alert("PIN kam se kam 4 digit ka ho");
  try{await updatePassword(auth.currentUser,pw(n));alert("PIN badal gaya ✅")}catch(e){alert(e.code=="auth/requires-recent-login"?"Logout karke dobara login karo, phir PIN badlo":"Error: "+(e.code||e.message))}};
-</script></body></html>
+</script></body></html> 
