@@ -1,0 +1,452 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0b0f"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+<title>Gym</title>
+<style>
+:root{--bg:#0b0b0f;--cd:#16171d;--cd2:#1f2129;--tx:#f4f4f6;--mu:#8b8e99;--ac:#ff3b3b;--ok:#2ecc71;--go:#f5b301;--bd:#262833}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--tx);padding-bottom:90px}
+.w{max-width:520px;margin:auto;padding:18px 16px}
+.c,.s{background:var(--cd);border:1px solid var(--bd);border-radius:18px;padding:16px;margin-bottom:12px;animation:up .35s ease both}
+@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+input,select{width:100%;padding:13px;margin:5px 0;border:1px solid var(--bd);border-radius:12px;background:var(--cd2);color:var(--tx);font-size:16px}
+button{padding:11px 15px;border:0;border-radius:12px;background:var(--ac);color:#fff;font-size:14px;font-weight:600;margin:3px 4px 3px 0}
+button.g{background:var(--cd2);color:var(--tx)}button.ok{background:#1f8f55}button:disabled{opacity:.5}
+.mu{color:var(--mu);font-size:13px}.r{color:#ff6b6b}.o{color:var(--ok)}.go{color:var(--go)}
+.hd{display:flex;align-items:center;gap:12px;margin-bottom:16px}.lg{font-size:32px}.lg img{height:42px;border-radius:10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.grid .s{margin:0}.s b{display:block;font-size:26px;margin-top:4px}
+nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:var(--cd);border-top:1px solid var(--bd);padding:6px 0 calc(6px + env(safe-area-inset-bottom,0px))}
+nav a{flex:1;text-align:center;font-size:11px;color:var(--mu);padding:6px}nav a.on{color:var(--ac);font-weight:700}nav a span{display:block;font-size:21px}
+.t{display:flex;gap:6px;margin:8px 0}.t button{flex:1;margin:0}h3{margin:18px 0 10px;font-size:16px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}.cen{text-align:center}.big{font-size:42px;font-weight:800}
+@media print{body *{visibility:hidden}#qrc,#qrc *{visibility:visible}#qrc{position:absolute;left:0;top:0;width:100%;background:#fff;color:#000}}
+body{background:radial-gradient(900px 500px at 85% -10%,rgba(255,59,59,.22),transparent 60%),radial-gradient(700px 500px at -10% 30%,rgba(245,179,1,.10),transparent 60%),#0b0b0f;background-attachment:fixed}
+.c,.s{background:linear-gradient(145deg,#1a1b22,#14151a);box-shadow:0 8px 24px rgba(0,0,0,.35)}
+button{background:linear-gradient(135deg,var(--ac),#ff7a45);box-shadow:0 6px 16px rgba(255,59,59,.3);transition:transform .15s}
+button:active{transform:scale(.95)}button.g{background:var(--cd2);box-shadow:none}button.ok{background:linear-gradient(135deg,#1f8f55,#2ecc71);box-shadow:0 6px 16px rgba(46,204,113,.25)}
+.hero{border-radius:22px;padding:20px;margin-bottom:14px;background:linear-gradient(135deg,var(--ac),#ff7a45 60%,#f5b301);color:#fff;position:relative;overflow:hidden;animation:up .4s ease both;box-shadow:0 12px 30px rgba(255,59,59,.3)}
+.hero:after{content:"";position:absolute;right:-30px;top:-30px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.15)}
+.hero h2{margin:0 0 4px;font-size:22px}.hero .q{opacity:.92;font-size:13px;margin-top:8px}.hero .n{font-size:48px;font-weight:800;line-height:1.1}
+.avt{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px;color:#fff;flex:none}
+.pill{display:inline-block;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:700}
+.pill.o{background:rgba(46,204,113,.15)}.pill.r{background:rgba(255,107,107,.15)}.pill.go{background:rgba(245,179,1,.15)}
+.bar{height:6px;border-radius:9px;background:var(--cd2);margin:10px 0 6px;overflow:hidden}.bar i{display:block;height:100%;border-radius:9px;animation:gr 1s ease both}
+@keyframes gr{from{width:0}}
+.s{position:relative;overflow:hidden}.s .ic{position:absolute;right:12px;top:10px;font-size:26px}
+nav{left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom,0px));border-radius:22px;border:1px solid var(--bd);backdrop-filter:blur(14px);background:rgba(22,23,29,.9);padding:6px 0}
+nav a span{transition:.2s}nav a.on span{transform:translateY(-3px) scale(1.18)}
+@keyframes pu{0%,100%{transform:scale(1)}50%{transform:scale(1.09)}}.pl{animation:pu 2.4s ease-in-out infinite;display:inline-block}
+.cf{position:fixed;top:-14px;width:9px;height:14px;z-index:99;animation:fall 2.4s linear forwards}
+@keyframes fall{to{transform:translateY(105vh) rotate(720deg)}}
+.hero2{border-radius:24px;padding:20px;margin-bottom:14px;background:linear-gradient(135deg,var(--ac),#ff7a45 55%,#f5b301);position:relative;overflow:hidden;box-shadow:0 14px 34px rgba(255,59,59,.32);animation:up .4s ease both}
+.hero2:before{content:"";position:absolute;right:-40px;top:-40px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.16)}
+.hero2>*{position:relative;z-index:1}.hp{height:8px;border-radius:9px;background:rgba(0,0,0,.25);margin:12px 0}.hp i{display:block;height:100%;border-radius:9px;background:#fff;animation:gr 1s ease both}
+.chip{display:inline-block;background:rgba(0,0,0,.28);padding:6px 11px;border-radius:99px;font-size:12px;font-weight:700;margin:3px 4px 0 0}
+.day{display:flex;justify-content:space-between;align-items:center;padding:20px 18px;margin-bottom:10px;border-radius:16px;background:var(--cd2);border:1px solid var(--bd);font-size:18px;font-weight:800}
+.day.now{background:linear-gradient(135deg,#fff,#ffe9d6);color:#111;box-shadow:0 0 0 2px var(--ac),0 10px 26px rgba(255,59,59,.35);animation:pu 2s ease-in-out infinite}
+.stb{background:#111;color:#fff;border-radius:99px;padding:12px 18px;margin:0;font-size:14px;box-shadow:none}
+.tk{color:var(--ok);font-size:22px}.day.mis,.day.lk{opacity:.45}.day span{font-size:13px;font-weight:600}.day .tk{font-size:22px}
+.bdg{flex:1;text-align:center;padding:12px 4px;border-radius:14px;background:var(--cd2);font-size:12px}.bdg b{display:block;font-size:26px}.bdg.off{opacity:.35;filter:grayscale(1)}
+/* ===== ADMIN YELLOW THEME ===== */
+body.adm{--ac:var(--ad);--cd:#0f1526;--cd2:#18203a;--bd:#222c48;background:radial-gradient(900px 500px at 85% -10%,rgba(255,196,0,.14),transparent 60%),#080c16;background-attachment:fixed}
+body.adm button{background:var(--ad);color:#111;box-shadow:0 6px 16px rgba(255,196,0,.22)}
+body.adm button.g{background:var(--cd2);color:var(--tx);box-shadow:none}
+body.adm button.ok{background:linear-gradient(135deg,#1f8f55,#2ecc71);color:#fff;box-shadow:none}
+body.adm .c,body.adm .s{background:linear-gradient(145deg,#111a30,#0c1222);border-color:var(--bd)}
+body.adm nav{background:rgba(10,15,30,.94)}
+body.adm nav a.on{color:var(--ad)}
+nav a.ctr{flex:none;width:64px;margin-top:-28px;padding:0}
+nav a.ctr span{width:58px;height:58px;border-radius:50%;background:var(--ad);display:flex;align-items:center;justify-content:center;margin:0 auto;box-shadow:0 6px 18px rgba(255,196,0,.45),0 0 0 5px #080c16;font-size:24px}
+nav a.ctr.on span{transform:none}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.top a{width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-size:22px}
+.tl{display:flex;align-items:center;gap:8px;font-size:20px;font-style:italic;font-weight:800}
+.tl img{height:30px;border-radius:8px}
+.bdgn{position:absolute;top:2px;right:2px;min-width:17px;height:17px;border-radius:9px;background:#ff3b3b;color:#fff;font:700 10px/17px system-ui;text-align:center;font-style:normal}
+.ban{border-radius:20px;padding:22px 18px;margin-bottom:12px;background:linear-gradient(120deg,#0b1020 40%,#1b2540);border:1px solid var(--bd);position:relative;overflow:hidden;animation:up .4s ease both}
+.ban h1{margin:0 0 14px;font-size:34px;line-height:1.05;font-style:italic;font-weight:900;color:#fff}
+.ban .em{position:absolute;right:14px;bottom:6px;font-size:84px}
+.ban button{margin:0}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.tile{background:linear-gradient(145deg,#111a30,#0c1222);border:1px solid var(--bd);border-radius:16px;padding:14px 4px;text-align:center;font-size:12px;font-weight:600}
+.tile span{display:block;font-size:26px;margin-bottom:4px}
+.tile:active{transform:scale(.96)}
+.vl{color:var(--ad);font-size:13px;font-weight:700}
+
+/* ===== PREMIUM ICONS + OFFERS ===== */
+nav a span svg{stroke-width:1.7}nav a.ctr span{color:#111}
+.top a{color:var(--tx)}.s .ic{color:var(--ad);opacity:.9;top:12px;right:14px}.s .ic svg{margin:0}
+.tile span.ti{width:48px;height:48px;border-radius:15px;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(255,196,0,.22),rgba(255,196,0,.04));border:1px solid rgba(255,196,0,.28);color:var(--ad);font-size:0}
+.ban .em{color:var(--ad);opacity:.32;line-height:0;font-size:0;right:10px;bottom:10px}.ban .em svg{margin:0}
+.gi{width:50px;height:50px;border-radius:15px;display:flex;align-items:center;justify-content:center;color:var(--ad);background:linear-gradient(135deg,rgba(255,196,0,.22),rgba(255,196,0,.04));border:1px solid rgba(255,196,0,.28)}
+.tk{display:flex;align-items:center}.tk svg{margin:0}
+textarea{width:100%;padding:13px;margin:5px 0;border:1px solid var(--bd);border-radius:12px;background:var(--cd2);color:var(--tx);font:inherit;font-size:16px;resize:none}
+.chk{display:flex;align-items:center;gap:10px;margin:12px 0 6px;font-size:14px}.chk input{width:20px;height:20px;margin:0}
+.thm{display:flex;gap:10px;margin:8px 0}.thm i{width:36px;height:36px;border-radius:50%;border:3px solid transparent;box-sizing:border-box}.thm i.on{border-color:#fff;box-shadow:0 0 0 2px var(--ad)}
+.ads{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px 14px;padding:2px 16px 6px;scrollbar-width:none}.ads::-webkit-scrollbar{display:none}
+.ad{flex:0 0 86%;scroll-snap-align:center;position:relative;overflow:hidden;border-radius:22px;min-height:190px;display:flex;align-items:flex-end;background:var(--g);border:1px solid rgba(255,255,255,.1);box-shadow:0 14px 30px rgba(0,0,0,.45)}
+.ad.single{flex-basis:100%}.c>.ad{margin:0}
+.ad>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ad.hasimg:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85),rgba(0,0,0,.05) 70%)}
+.ad .deco{position:absolute;right:-20px;top:-20px;color:rgba(255,255,255,.16)}.ad .deco svg{margin:0}
+.ad .in{position:relative;z-index:2;padding:16px;width:100%}
+.ad h4{margin:8px 0 4px;font-size:21px;line-height:1.15;font-weight:800;color:#fff}
+.ad p{margin:0;font-size:13px;line-height:1.4;color:rgba(255,255,255,.9);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.tagc{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.2);backdrop-filter:blur(8px);padding:5px 11px;border-radius:99px;font-size:11px;font-weight:800;letter-spacing:.7px;color:#fff;text-transform:uppercase}.tagc svg{margin:0}
+.mo{position:fixed;inset:0;z-index:120;background:rgba(0,0,0,.86);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:18px;animation:fi .25s ease}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+.mc{width:100%;max-width:420px;max-height:88vh;overflow:auto;border-radius:24px;background:#10162a;border:1px solid rgba(255,255,255,.1);animation:up .3s ease both;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js"></script></head><body><div class="w" id="app"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {getAuth,signInWithEmailAndPassword,createUserWithEmailAndPassword,signOut,onAuthStateChanged,updatePassword} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {getFirestore,doc,setDoc,getDoc,updateDoc,deleteDoc,addDoc,collection,getDocs,query,where,orderBy,limit} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const LOGO="data:image/svg+xml,"+encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#ffd23f'/><stop offset='1' stop-color='#ff7a00'/></linearGradient></defs><rect width='100' height='100' rx='24' fill='url(#g)'/><g stroke='#111' stroke-width='6' stroke-linecap='round' fill='none'><path d='M30 32v36M70 32v36M20 42v16M80 42v16M30 50h40'/></g></svg>`);
+/* ===== NAYE CLIENT KE LIYE SIRF YE 2 BLOCK BADLO ===== */
+const BRAND={name:"Dp's GYM",tag:"Stronger every day",logo:LOGO,accent:"#ff3b3b",ad:"#ffc400",upi:"9890288165@ibl",wa:"9890288165",admin:"faizanshaikh3785@gmail.com",cc:"91"};
+const cfg={
+ apiKey:"AIzaSyBP4ZpmshodhuiAKHpgSntnobvp_f5pLmk",
+ authDomain:"dp-s-gym.firebaseapp.com",
+ projectId:"dp-s-gym",
+ storageBucket:"dp-s-gym.firebasestorage.app",
+ messagingSenderId:"441221044969",
+ appId:"1:441221044969:web:92a67132f2ba4ef5ea6e78"
+};
+/* ===== YAHAN SE NEECHE KUCH NAHI BADALNA ===== */
+const ADMIN=BRAND.admin;
+document.title=BRAND.name;document.documentElement.style.setProperty("--ac",BRAND.accent);document.documentElement.style.setProperty("--ad",BRAND.ad||"#ffc400");
+{const ic="data:image/svg+xml,"+encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='#0b0b0f'/><text x='50' y='68' font-size='56' text-anchor='middle'>${BRAND.logo.length<5?BRAND.logo:"🏋️"}</text></svg>`);
+ const l=document.createElement("link");l.rel="manifest";l.href="data:application/manifest+json,"+encodeURIComponent(JSON.stringify({name:BRAND.name,short_name:BRAND.name,start_url:location.pathname,display:"standalone",background_color:"#0b0b0f",theme_color:"#0b0b0f",icons:[{src:(/^(http|data:)/.test(BRAND.logo)?BRAND.logo:ic),sizes:"any",type:"image/svg+xml",purpose:"any"}]}));document.head.appendChild(l)}
+const app=initializeApp(cfg),auth=getAuth(app),db=getFirestore(app);
+const auth2=getAuth(initializeApp(cfg,"second"));
+const $=s=>document.querySelector(s),A=$("#app");
+const ymd=d=>{const z=new Date(d.getTime()-d.getTimezoneOffset()*6e4);return z.toISOString().slice(0,10)};
+const today=()=>ymd(new Date()),addD=(s,n)=>{const d=new Date(s+"T12:00");d.setDate(d.getDate()+n);return ymd(d)};
+const diff=s=>Math.round((new Date(s+"T12:00")-new Date(today()+"T12:00"))/864e5);
+const mail=(p,r=0)=>p.replace(/\D/g,"")+(r?".r"+r:"")+"@gym.app",pw=p=>p+"@gym";
+const logo=()=>`<div class="lg">${/^(http|data:)/.test(BRAND.logo)?`<img src="${BRAND.logo}">`:BRAND.logo}</div>`;
+const head=sub=>`<div class="hd">${logo()}<div><b style="font-size:19px">${BRAND.name}</b><div class="mu">${sub}</div></div></div>`;
+const L=()=>A.innerHTML="<p class='mu'>Loading...</p>";
+const pos=()=>new Promise((res,rej)=>navigator.geolocation?navigator.geolocation.getCurrentPosition(p=>res(p.coords),rej,{enableHighAccuracy:true,timeout:12000}):rej());
+const dist=(a,b)=>{const R=6371e3,t=x=>x*Math.PI/180,dl=t(b.lat-a.latitude),dn=t(b.lng-a.longitude),h=Math.sin(dl/2)**2+Math.cos(t(a.latitude))*Math.cos(t(b.lat))*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(h))};
+const greet=()=>{const h=new Date().getHours();return h<12?"Good morning":h<17?"Good afternoon":"Good evening"};
+const quote=()=>["Aaj ka pasina, kal ki taaqat 💪","Excuses nahi, reps gino 🔥","Chhota step bhi step hai 🚀","Discipline > Motivation ⚡","Body wahi banti hai jo roz karte ho 🏆"][new Date().getDate()%5];
+const AV=["#ff3b3b","#f5b301","#2ecc71","#3b82f6","#a855f7","#ec4899"];
+const av=n=>`<div class="avt" style="background:${AV[(n.charCodeAt(0)+n.length)%6]}">${n[0].toUpperCase()}</div>`;
+const confetti=()=>{for(let i=0;i<40;i++){const d=document.createElement("i");d.className="cf";d.style.cssText=`left:${Math.random()*100}vw;background:${AV[i%6]};animation-delay:${Math.random()*.6}s`;document.body.appendChild(d);setTimeout(()=>d.remove(),3300)}};
+
+const P={
+home:'<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+users:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+user:'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+check:'<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/>',
+circ:'<circle cx="12" cy="12" r="9"/>',
+grid:'<rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/>',
+bell:'<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>',
+menu:'<path d="M4 6h16M4 12h16M4 18h10"/>',
+dumbbell:'<path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/>',
+card:'<rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20"/>',
+calendar:'<rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+trend:'<path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/>',
+phone:'<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>',
+flame:'<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>',
+award:'<circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/>',
+rupee:'<path d="M6 3h12M6 8h12M6 13l8.5 8M6 13h3"/><path d="M9 13c6.667 0 6.667-10 0-10"/>',
+alert:'<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3z"/><path d="M12 9v4M12 17h.01"/>',
+mega:'<path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>',
+image:'<rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.09-3.09a2 2 0 0 0-2.82 0L6 21"/>',
+plus:'<path d="M12 5v14M5 12h14"/>',
+trash:'<path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>',
+eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+edit:'<path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/>',
+camera:'<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>',
+scan:'<path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><rect x="8" y="8" width="3" height="3" rx=".5"/><rect x="13" y="13" width="3" height="3" rx=".5"/><path d="M13 8h3v3M8 13v3"/>',
+spark:'<path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 3v4M17 5h4"/>',
+zap:'<path d="M13 2 3 14h9l-1 8 10-12h-9z"/>',
+tag:'<path d="M20.59 13.41 13.42 20.58a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1.5"/>',
+lock:'<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+x:'<path d="M18 6 6 18M6 6l12 12"/>'};
+const I=(n,z=22)=>`<svg width="${z}" height="${z}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:block;margin:0 auto">${P[n]||""}</svg>`;
+const esc=t=>String(t||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])),nl=t=>esc(t).replace(/\n/g,"<br>");
+const TH={gold:["Gold","linear-gradient(135deg,#f59e0b,#b45309)"],red:["Red","linear-gradient(135deg,#ef4444,#7f1d1d)"],blue:["Blue","linear-gradient(135deg,#3b82f6,#1e3a8a)"],green:["Green","linear-gradient(135deg,#10b981,#064e3b)"],purple:["Purple","linear-gradient(135deg,#a855f7,#4c1d95)"]};
+const TG={offer:["Offer","tag"],fest:["Festival","spark"],new:["New","zap"],note:["Notice","mega"]};
+let ADS=[],AD={img:"",theme:"gold"};
+const live=a=>a.on!==false&&(!a.until||a.until>=today());
+const adCard=(a,n,click=true)=>{const t=TG[a.tag]||TG.offer,g=(TH[a.theme]||TH.gold)[1];
+ return `<div class="ad ${a.img?"hasimg":"noimg"} ${n==1?"single":""}" style="--g:${g}" ${click?`onclick="ov('${a.id}')"`:""}>${a.img?`<img src="${a.img}" alt="">`:`<div class="deco">${I(t[1],150)}</div>`}<div class="in"><span class="tagc">${I(t[1],13)}${t[0]}</span>${a.title?`<h4>${esc(a.title)}</h4>`:""}${a.text?`<p>${esc(a.text)}</p>`:""}</div></div>`};
+const adsH=l=>{l=(l||[]).filter(live);return l.length?`<div class="ads">${l.map(a=>adCard(a,l.length)).join("")}</div>`:""};
+const seen=id=>{try{return localStorage.getItem("seen_"+id)}catch(e){return "1"}};
+window.cm=()=>{const o=$("#mo");if(o){try{if(o.dataset.s)localStorage.setItem("seen_"+o.dataset.s,"1")}catch(e){}o.remove()}};
+window.ov=id=>{const a=ADS.find(x=>x.id==id);if(!a)return;const t=TG[a.tag]||TG.offer,g=(TH[a.theme]||TH.gold)[1];cm();
+ const o=document.createElement("div");o.className="mo";o.id="mo";o.onclick=e=>{if(e.target===o)cm()};
+ o.innerHTML=`<div class="mc">${a.img?`<img src="${a.img}" style="width:100%;display:block" alt="">`:`<div style="height:110px;background:${g};display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.9)">${I(t[1],54)}</div>`}<div style="padding:18px"><span class="tagc" style="background:${g}">${I(t[1],13)}${t[0]}</span>${a.title?`<h3 style="margin:12px 0 6px;font-size:22px">${esc(a.title)}</h3>`:""}${a.text?`<div style="opacity:.9;line-height:1.55;font-size:15px">${nl(a.text)}</div>`:""}<button style="width:100%;margin-top:18px" onclick="cm()">Close</button></div></div>`;
+ document.body.appendChild(o);return o};
+let mode=location.hash=="#admin"?"admin":"member",view="home",members=[],att=[],pays=[],tab="all",sq="",qrCode="";
+window.setMode=m=>{mode=m;login()};
+function login(msg=""){document.body.classList.remove("adm");const adm=location.hash=="#admin";if(!adm)mode="member";
+ A.innerHTML=`<div class="cen" style="padding-top:30px"><div style="font-size:64px"><span class="pl">${/^(http|data:)/.test(BRAND.logo)?`<img src="${BRAND.logo}" style="height:80px;border-radius:16px">`:BRAND.logo}</span></div><h2 style="margin:8px 0 2px">${BRAND.name}</h2><div class="mu" style="margin-bottom:22px">${BRAND.tag}</div></div>
+ ${adm?`<div class="t"><button class="${mode=="member"?"":"g"}" onclick="setMode('member')">Member</button><button class="${mode=="admin"?"":"g"}" onclick="setMode('admin')">Admin</button></div>`:""}
+ <div class="c">${mode=="admin"?`<input id="u" type="email" placeholder="Admin email" value="${ADMIN}"><input id="p" type="password" placeholder="Password">`:`<input id="u" type="tel" placeholder="Phone number"><input id="p" type="password" inputmode="numeric" placeholder="PIN">`}
+ <button style="width:100%;padding:14px;margin-top:8px" onclick="doLogin()">Login</button><div class="r" style="margin-top:8px">${msg}</div></div>`}
+window.doLogin=async()=>{const u=$("#u").value.trim(),p=$("#p").value;
+ try{if(mode=="admin")await signInWithEmailAndPassword(auth,u,p);
+  else{for(let i=0;i<4;i++){try{return await signInWithEmailAndPassword(auth,mail(u,i),pw(p))}catch(e){if(e.code=="auth/too-many-requests"||e.code=="auth/network-request-failed")throw e}}throw{code:"x"}}}
+ catch(e){login(e.code=="auth/too-many-requests"?"Bahut baar galat try kiya, thodi der baad try karo":e.code=="auth/network-request-failed"?"Internet check karo":"Phone/PIN galat hai ya account nahi hai")}};
+window.logout=()=>signOut(auth);
+addEventListener("hashchange",()=>{if(!auth.currentUser){mode=location.hash=="#admin"?"admin":"member";login()}});
+onAuthStateChanged(auth,async u=>{
+ if(!u)return login();L();
+ try{if(u.email===ADMIN)await admin();else await member(u.uid)}
+ catch(e){A.innerHTML="<p class='r'>Kuch gadbad hui. Internet check karke refresh karo.</p><button onclick='logout()'>Logout</button>"}
+});
+const ring=(d,ex)=>{const f=Math.max(0,Math.min(d,30))/30,c=ex?"#ff3b3b":d<=3?"#f5b301":"#2ecc71";
+ return `<svg width="150" height="150" viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="#262833" stroke-width="10"/><circle cx="60" cy="60" r="52" fill="none" stroke="${c}" stroke-width="10" stroke-linecap="round" stroke-dasharray="${f*326.7} 326.7" transform="rotate(-90 60 60)"/><text x="60" y="60" text-anchor="middle" fill="#f4f4f6" font-size="28" font-weight="700">${ex?0:d}</text><text x="60" y="78" text-anchor="middle" fill="#8b8e99" font-size="10">din baaki</text></svg>`};
+async function checkin(uid,m){const s=m.lastCheckin===addD(today(),-1)?(m.streak||0)+1:1;
+ await updateDoc(doc(db,"members",uid),{streak:s,lastCheckin:today()});
+ await setDoc(doc(db,"attendance",today()+"_"+uid),{uid,name:m.name,date:today(),time:new Date().toTimeString().slice(0,5)});
+ return{...m,streak:s,lastCheckin:today()}}
+async function verify(uid,m,c){let note="";
+ const q=await getDoc(doc(db,"settings","qr")),qd=q.exists()?q.data():{},ok=qd.code===c||(qd.live&&qd.prev===c);
+ const gs=await getDoc(doc(db,"settings","gym"));let far="";
+ if(ok&&gs.exists()){try{const p=await pos();far=dist(p,gs.data())>gs.data().r?"far":""}catch(e){far="noloc"}}
+ if(!ok)note="❌ Ye QR sahi nahi hai. Gym gate ka QR scan karo."
+ else if(far=="noloc")note="📍 Location ON karke Allow dabao, phir scan karo."
+ else if(far)note="📍 Aap gym ke paas nahi ho."
+ else if(diff(m.expiry)<0)note="⚠️ Membership expire ho gayi. Pehle fee jama karo."
+ else if(m.lastCheckin===today())note="✅ Aaj ka check-in ho chuka hai."
+ else{m=await checkin(uid,m);note="✅ Check-in ho gaya! Keep going 💪"}
+ return{m,note}}
+let MD=null,mtab="plan",SC=null;
+async function member(uid){document.body.classList.add("adm");
+ const r=await getDoc(doc(db,"members",uid));
+ if(!r.exists())return A.innerHTML="<p>Account nahi mila. Gym se sampark karo.</p><button onclick='logout()'>Logout</button>";
+ let m=r.data(),note="";const c=new URLSearchParams(location.search).get("c");
+ const [as,ps]=await Promise.all([getDocs(query(collection(db,"attendance"),where("uid","==",uid))),getDocs(query(collection(db,"payments"),where("uid","==",uid)))]);
+ const days=new Set(as.docs.map(x=>x.data().date)),pl=ps.docs.map(x=>x.data()).sort((a,b)=>b.date.localeCompare(a.date)).slice(0,8);
+ let ok=false;
+ if(c){const v=await verify(uid,m,c);m=v.m;note=v.note;ok=note.startsWith("✅ Check-in ho gaya");if(ok)days.add(today());history.replaceState(null,"",location.pathname)}
+ let rq=[];try{rq=(await getDocs(query(collection(db,"payreq"),where("uid","==",uid)))).docs.map(x=>x.data()).sort((a,b)=>b.ts-a.ts)}catch(e){}
+ let ads=[];try{ads=(await getDocs(query(collection(db,"ads"),orderBy("ts","desc"),limit(8)))).docs.map(x=>({id:x.id,...x.data()}))}catch(e){}
+ ADS=ads;MD={uid,m,days,pl,note,rq};mtab="home";mdraw();if(ok)confetti();
+ const pa=ads.filter(live).find(a=>a.popup&&!seen(a.id));if(pa&&!ok)setTimeout(()=>{const o=ov(pa.id);if(o)o.dataset.s=pa.id},800)}
+const lsm=()=>/^(http|data:)/.test(BRAND.logo)?`<img src="${BRAND.logo}">`:BRAND.logo;
+const GL={fat:["flame","Weight loss"],muscle:["dumbbell","Muscle gain"],fit:["zap","Fit rehna"]};
+const LIB={"Chest+Triceps":[["Bench press","4×10"],["Incline dumbbell press","3×12"],["Push-ups","3×15"],["Triceps pushdown","3×12"],["Dips","3×10"]],
+"Back+Biceps":[["Lat pulldown","4×10"],["Seated row","3×12"],["Deadlift","3×8"],["Barbell curl","3×12"],["Hammer curl","3×12"]],
+"Legs":[["Squats","4×12"],["Leg press","3×12"],["Lunges","3×12"],["Leg curl","3×12"],["Calf raises","4×15"]],
+"Shoulders+Abs":[["Shoulder press","4×10"],["Lateral raise","3×15"],["Front raise","3×12"],["Plank","3×45 sec"],["Crunches","3×20"]],
+"Cardio+Core":[["Treadmill run","20 min"],["Cycling","10 min"],["Mountain climbers","3×30 sec"],["Leg raises","3×15"],["Plank","3×45 sec"]],
+"Full body":[["Squats","3×15"],["Push-ups","3×15"],["Dumbbell row","3×12"],["Burpees","3×10"],["Plank","3×40 sec"]],
+"HIIT":[["Jumping jacks","4×40 sec"],["High knees","4×40 sec"],["Burpees","4×40 sec"],["Skipping","3 min"],["Stretching","5 min"]]};
+const SCH={muscle:["Chest+Triceps","Back+Biceps","Legs","Shoulders+Abs","Chest+Triceps","Back+Biceps"],fat:["Cardio+Core","Full body","HIIT","Legs","Cardio+Core","Full body"],fit:["Full body","Cardio+Core","Shoulders+Abs","Legs","HIIT","Chest+Triceps"]};
+const DN=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],LV=["Rookie","Fighter","Beast","Legend"];
+let WS=null;
+const sv=async o=>{try{await updateDoc(doc(db,"members",MD.uid),o)}catch(e){}};
+window.mt=t=>{mtab=t;MD.note="";mdraw()};
+window.ct=()=>BRAND.wa?open(`https://wa.me/${BRAND.cc}${BRAND.wa}`):alert("Gym ka number abhi set nahi hai");
+window.sgl=async g=>{MD.m.goal=g;WS=null;mdraw();sv({goal:g})};
+window.wsel=i=>{WS=i;mdraw()};
+window.wtk=i=>{const m=MD.m,t=today(),x=m.wk&&m.wk.d==t?m.wk.x:[];m.wk={d:t,x:x.includes(i)?x.filter(a=>a!=i):[...x,i]};mdraw();sv({wk:m.wk})};
+window.wfin=()=>{const m=MD.m,t=today();m.wc=[...(m.wc||[]).filter(x=>x!=t),t].slice(-90);mdraw();confetti();sv({wc:m.wc})};
+window.pu=()=>{if(!BRAND.upi)return alert("Gym ne abhi UPI ID set nahi ki");const a=(MD.m.fee||0)*(+$("#pmo").value);if(!a)return alert("Fee set nahi hai. Gym se baat karo");location.href=`upi://pay?pa=${BRAND.upi}&pn=${encodeURIComponent(BRAND.name)}&am=${a}&cu=INR&tn=${encodeURIComponent("Gym fee")}`};
+window.pr=async()=>{const m=MD.m,mo=+$("#pmo").value,u=$("#utr").value.replace(/\D/g,""),M=t=>$("#pmsg").textContent=t;
+ if(u.length!=12)return M("12 digit UTR / Transaction ID daalo (UPI app ki payment detail mein milti hai)");
+ if(!(m.fee||0))return M("Fee set nahi hai. Gym se baat karo");
+ const r={uid:MD.uid,name:m.name,phone:m.phone,months:mo,amount:m.fee*mo,utr:u,status:"pending",date:today(),ts:Date.now()};
+ try{await setDoc(doc(db,"payreq",u),r);MD.rq=[r,...(MD.rq||[])];MD.note="✅ Request bhej di. Admin check karte hi membership badh jayegi.";mdraw()}
+ catch(e){M("Ye Transaction ID pehle use ho chuki hai ya internet check karo")}};
+function mdraw(){const {m,days,pl,note,rq}=MD,d=diff(m.expiry),ex=d<0,st=m.streak||0;
+ const idx=d>0?Math.floor((d-1)/30):0,bs=addD(addD(m.expiry,-30*idx),-30),dl=Array.from({length:30},(_,i)=>addD(bs,i)),done=dl.filter(x=>days.has(x)).length;
+ const wc=m.wc||[],lv=Math.min(3,Math.floor(wc.length/10));
+ const nv=`<nav>${[["home","home","Home"],["work","dumbbell","Workout"],["scan","scan",""],["prog","trend","Progress"],["set","user","Profile"]].map(n=>n[0]=="scan"?`<a class="ctr" onclick="scan()"><span>${I("scan",26)}</span></a>`:`<a class="${mtab==n[0]?"on":""}" onclick="mt('${n[0]}')"><span>${I(n[1])}</span>${n[2]}</a>`).join("")}</nav>`;
+ const top=`<div class="top"><a onclick="mt('set')">${I("menu")}</a><div class="tl"><span>${lsm()}</span><b>${BRAND.name}</b></div><a onclick="mt('pay')" style="position:relative">${I("bell")}${ex||d<=3?`<i class="bdgn">1</i>`:""}</a></div>`;
+ const nt=note?`<div class="c"><b>${note}</b></div>`:"";
+ let body="";
+ if(mtab=="plan"){body=nt+(ex?`<div class="c" style="border-color:#ff6b6b"><b class="r">Membership expire ho gayi</b><div class="mu">Fee ₹${m.fee||0} jama karke renew karao</div></div>`:d<=3?`<div class="c"><b class="go">⏰ ${d} din mein expire hogi</b><div class="mu">Fee ₹${m.fee||0} time par jama karo</div></div>`:"")+
+  `<h3>Aapka 30 din ka plan</h3>`+dl.map((dt,i)=>{const on=days.has(dt),n=`Day ${i+1}`;
+   if(on)return`<div class="day"><span style="font-size:18px;font-weight:800;color:inherit">${n}</span><span class="tk">${I("check",24)}</span></div>`;
+   if(dt==today()&&!ex)return`<div class="day now"><span style="font-size:18px;font-weight:800">${n}</span><button class="stb" onclick="scan()">Check-in ▶</button></div>`;
+   if(dt<today())return`<div class="day mis"><span style="font-size:18px;font-weight:800">${n}</span><span>Missed</span></div>`;
+   return`<div class="day lk"><span style="font-size:18px;font-weight:800">${n}</span><span class="mu">${I("lock",18)}</span></div>`}).join("")}
+ if(mtab=="home"){body=nt+(ex?`<div class="c" style="border-color:#ff6b6b"><b class="r">Membership expire ho gayi</b><div class="mu">Payment tab se renew karo</div></div>`:d<=3?`<div class="c"><b class="go">⏰ ${d} din mein expire hogi</b><div class="mu">Payment tab se renew karo</div></div>`:"")+
+  `${adsH(ADS)}<div class="ban"><h1>NO PAIN<br>NO GAIN</h1><button onclick="mt('work')">Start Training ▶</button><div class="em">${I("dumbbell",110)}</div></div>
+  <div class="c row" style="justify-content:flex-start;gap:12px">${av(m.name)}<div style="flex:1"><div class="mu">${greet()}!</div><b style="font-size:17px">${m.name} 👋</b></div><span class="pill go">Member</span></div>
+  <div class="grid" style="margin-bottom:12px"><div class="s"><span class="ic">${I("card",24)}</span><span class="mu">Membership</span><b class="${ex?"r":"o"}">${ex?"Expired":d+" din"}</b></div><div class="s"><span class="ic">${I("check",24)}</span><span class="mu">Total visits</span><b>${days.size}</b></div><div class="s"><span class="ic">${I("flame",24)}</span><span class="mu">Streak</span><b>${st}</b></div><div class="s"><span class="ic">${I("award",24)}</span><span class="mu">Level</span><b style="font-size:20px">${LV[lv]}</b></div></div>
+  <h3>Quick menu</h3><div class="tiles">${[["user","My Profile","mt('set')"],["dumbbell","Workout Plan","mt('work')"],["card","Payment","mt('pay')"],["calendar","30 din plan","mt('plan')"],["trend","Progress","mt('prog')"],["phone","Contact Us","ct()"]].map(t=>`<div class="tile" onclick="${t[2]}"><span class="ti">${I(t[0],22)}</span>${t[1]}</div>`).join("")}</div>
+  <div class="c cen mu">${quote()}</div>`}
+ if(mtab=="work"){const g=m.goal;
+  if(!g||!SCH[g]){body=nt+`<h3>Apna goal chuno 🎯</h3>`+Object.keys(GL).map(k=>`<div class="c row" onclick="sgl('${k}')"><div style="display:flex;gap:12px;align-items:center"><div class="gi">${I(GL[k][0],26)}</div><b>${GL[k][1]}</b></div><span class="vl">Chuno ▸</span></div>`).join("")}
+  else{const wd=new Date().getDay(),sel=WS==null?wd:WS,ty=sel?SCH[g][sel-1]:null,xs=ty?LIB[ty]:[],isT=sel==wd,dn=isT&&m.wk&&m.wk.d==today()?m.wk.x:[],fin=wc.includes(today());
+   body=nt+`<div class="c row"><div><b>${GL[g][1]}</b><div class="mu">Level: ${LV[lv]} · ${wc.length} workout done</div></div><button class="g" onclick="sgl('')">Goal badlo</button></div>
+   <div style="display:flex;gap:5px;margin-bottom:12px">${[1,2,3,4,5,6,0].map(i=>`<div onclick="wsel(${i})" class="bdg" style="${i==sel?"background:var(--ad);color:#111;font-weight:800":i==wd?"outline:1px solid var(--ad)":""}">${DN[i]}</div>`).join("")}</div>
+   ${!ty?`<div class="c cen"><div style="font-size:40px">😴</div><b>Rest day</b><div class="mu">Aaj aaram karo, body isi mein grow hoti hai.</div></div>`:`<h3>${ty}${isT?" · Aaj":""}</h3>`+xs.map((e,i)=>`<div class="c row" ${isT?`onclick="wtk(${i})"`:""}><div><b>${e[0]}</b><div class="mu">${e[1]}</div></div>${dn.includes(i)?`<span class="o">${I("check",26)}</span>`:`<span class="mu">${I("circ",26)}</span>`}</div>`).join("")+(isT?(fin?`<div class="c cen o"><b>🏆 Aaj ka workout complete!</b></div>`:`<div class="bar"><i style="width:${dn.length/xs.length*100}%;background:var(--ad)"></i></div><button style="width:100%" ${dn.length<xs.length?"disabled":""} onclick="wfin()">${dn.length<xs.length?dn.length+"/"+xs.length+" ho gaye":"🎉 Workout complete"}</button>`):"")}
+   <div class="mu cen" style="margin-top:12px">Koi dard ya bimari ho to pehle trainer/doctor se pooch lo.</div>`}}
+ if(mtab=="pay"){const pe=(rq||[]).some(r=>r.status=="pending"),fee=m.fee||0;
+  body=nt+`<div class="c"><b class="${ex?"r":"o"}">${ex?"❌ Membership expire ho gayi":"💳 "+d+" din baaki"}</b><div class="mu">Expiry: ${m.expiry} · ₹${fee}/mahina</div></div>`+(pe?`<div class="c"><b class="go">⏳ Payment check ho rahi hai</b><div class="mu">Admin confirm karte hi membership badh jayegi.</div></div>`:"")+
+  `<div class="c"><b>Membership renew karo</b><div class="mu" style="margin:4px 0 8px">1) Plan chuno, UPI se pay karo. 2) UPI app se 12 digit Transaction ID (UTR) copy karke yahan daalo. 3) Admin confirm karega aur membership apne aap badh jayegi.</div>
+  <select id="pmo">${[1,3,6,12].map(n=>`<option value="${n}">${n} mahina · ₹${fee*n}</option>`).join("")}</select>
+  <button style="width:100%" onclick="pu()">📲 UPI se pay karo</button>
+  <input id="utr" inputmode="numeric" placeholder="12 digit UTR / Transaction ID"><button class="ok" style="width:100%" onclick="pr()">✅ Maine pay kar diya</button><div id="pmsg" class="r"></div></div>
+  <div class="mu cen" style="margin-bottom:12px">🔒 Payment ki detail sirf aap aur gym admin dekh sakte hain.</div>`+
+  ((rq||[]).length?`<h3>Meri requests</h3>`+rq.slice(0,5).map(r=>`<div class="c row"><div><b>₹${r.amount}</b><div class="mu">${r.date} · ${r.months} mahina</div></div><span class="pill ${r.status=="approved"?"o":r.status=="rejected"?"r":"go"}">${r.status=="approved"?"Approved":r.status=="rejected"?"Rejected":"Pending"}</span></div>`).join(""):"")}
+ if(mtab=="prog"){const ym=today().slice(0,7),dim=new Date(+ym.slice(0,4),+ym.slice(5),0).getDate(),fd=new Date(ym+"-01T12:00").getDay();
+  const cal=`<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;text-align:center;font-size:12px">${["S","M","T","W","T","F","S"].map(x=>`<span class="mu">${x}</span>`).join("")}${"<span></span>".repeat(fd)}${Array.from({length:dim},(_,i)=>{const dt=ym+"-"+String(i+1).padStart(2,"0"),on=days.has(dt);return`<span style="padding:7px 0;border-radius:8px;background:${on?"var(--ok)":"var(--cd2)"};color:${on?"#000":"var(--mu)"}">${i+1}</span>`}).join("")}</div>`;
+  body=`<div class="grid"><div class="s"><span class="ic">${I("flame",24)}</span><span class="mu">Streak</span><b>${st}</b></div><div class="s"><span class="ic">${I("check",24)}</span><span class="mu">Total check-ins</span><b>${days.size}</b></div></div>
+  <h3>🏅 Badges</h3><div style="display:flex;gap:8px">${[[3,"🔥","3 din"],[7,"⭐","7 din"],[14,"💎","14 din"],[30,"🏆","30 din"]].map(b=>`<div class="bdg ${st>=b[0]?"":"off"}"><b>${b[1]}</b>${b[2]}</div>`).join("")}</div>
+  <h3>📅 Is mahine</h3><div class="c">${cal}</div>`}
+ if(mtab=="set"){body=`<div class="c cen">${av(m.name).replace('class="avt"','class="avt" style="width:70px;height:70px;font-size:30px;margin:0 auto 10px;background:'+AV[(m.name.charCodeAt(0)+m.name.length)%6]+'"').replace('style="background:'+AV[(m.name.charCodeAt(0)+m.name.length)%6]+'"','')}<b style="font-size:20px">${m.name}</b><div class="mu">${m.phone}</div></div>
+  <div class="c"><div class="row"><span class="mu">Membership expiry</span><b class="${ex?"r":"o"}">${m.expiry}</b></div><div class="row" style="margin-top:8px"><span class="mu">Monthly fee</span><b>₹${m.fee||0}</b></div></div>
+  <h3>💰 Payments</h3>${pl.map(p=>`<div class="c row"><div><b>₹${p.amount}</b><div class="mu">${p.date} · ${p.mode} · ${p.months} mahina</div></div><span class="pill o">Paid</span></div>`).join("")||"<div class='c mu'>Abhi koi payment nahi</div>"}
+  <button class="g" onclick="cp()">🔑 PIN badlo</button><button class="g" onclick="logout()">Logout</button>`}
+ A.innerHTML=top+body+nv;
+ if(mtab=="plan"){const n=document.querySelector(".day.now");if(n&&!note)n.scrollIntoView({block:"center",behavior:"smooth"})}}
+const cd=t=>{try{return new URL(t).searchParams.get("c")}catch(e){return null}};
+window.sc=()=>{if(SC){SC.run=false;try{SC.st.getTracks().forEach(t=>t.stop())}catch(e){}SC=null}const o=$("#scan");if(o)o.remove()};
+const BD=window.BarcodeDetector?new BarcodeDetector({formats:["qr_code"]}):null;
+const _cv=document.createElement("canvas"),_cx=_cv.getContext("2d",{willReadFrequently:true});
+async function decodeSrc(src,w,h,scales){
+ if(BD){try{const r=await BD.detect(src);if(r&&r.length&&r[0].rawValue)return r[0].rawValue}catch(e){}}
+ for(const mw of scales){const k=Math.min(1,mw/Math.max(w,h));_cv.width=Math.max(1,Math.round(w*k));_cv.height=Math.max(1,Math.round(h*k));_cx.drawImage(src,0,0,_cv.width,_cv.height);
+  const d=_cx.getImageData(0,0,_cv.width,_cv.height);const r=jsQR(d.data,_cv.width,_cv.height,{inversionAttempts:"attemptBoth"});if(r&&r.data)return r.data}
+ return null}
+async function gotQR(data){const c=cd(data);if(!c)return false;sc();const x=await verify(MD.uid,MD.m,c);MD.m=x.m;MD.note=x.note;const ok=x.note.startsWith("\u2705 Check-in ho gaya");if(ok)MD.days.add(today());mdraw();if(ok)confetti();return true}
+window.pickQR=async f=>{const e=$("#se");if(!f)return;e.textContent="Photo padh raha hu...";
+ try{const bm=await createImageBitmap(f);const d=await decodeSrc(bm,bm.width,bm.height,[1000,640,1400,400,300]);
+  if(d&&await gotQR(d))return;e.textContent=d?"\u274c Ye gym ka QR nahi hai":"\u274c Photo mein QR nahi mila. Saaf, seedhi photo lo (QR poora dikhe)."}
+ catch(err){e.textContent="\u274c Photo khul nahi payi, dobara try karo"}};
+window.scan=async()=>{
+ if(MD.days.has(today())){MD.note="\u2705 Aaj ka check-in ho chuka hai.";return mdraw()}
+ const o=document.createElement("div");o.id="scan";o.style.cssText="position:fixed;inset:0;z-index:100;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center";
+ o.innerHTML=`<video id="sv" playsinline muted style="width:100%;height:62%;object-fit:cover"></video><div style="color:#fff;padding:12px;text-align:center;font-weight:700">\ud83d\udcf7 Gym gate ka QR scan karo<div class="mu" id="se">QR ko frame ke beech mein rakho</div></div><input type="file" id="qf" accept="image/*" style="display:none" onchange="pickQR(this.files[0]);this.value=''"><button onclick="$('#qf').click()">\ud83d\uddbc Gallery se QR chuno</button><button class="g" onclick="sc()">Cancel</button>`;
+ document.body.appendChild(o);
+ let st;try{st=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:"environment"},width:{ideal:1280},height:{ideal:720}}})}catch(e){$("#se").textContent="Camera ki permission do (Allow), ya neeche Gallery se QR chuno";return}
+ const v=$("#sv");v.srcObject=st;await v.play();SC={st,run:true};
+ try{const tr=st.getVideoTracks()[0],cp=tr.getCapabilities?tr.getCapabilities():{};if(cp.focusMode&&cp.focusMode.includes("continuous"))await tr.applyConstraints({advanced:[{focusMode:"continuous"}]})}catch(e){}
+ let n=0,busy=false;
+ const tick=async()=>{if(!SC||!SC.run)return;
+  if(!busy&&v.videoWidth&&v.readyState>=2){busy=true;try{const d=await decodeSrc(v,v.videoWidth,v.videoHeight,n++%2?[480]:[800]);if(d&&SC&&SC.run&&await gotQR(d))return}catch(e){}busy=false}
+  setTimeout(tick,90)};tick()};
+async function newQR(){qrCode=Math.random().toString(36).slice(2,10);await setDoc(doc(db,"settings","qr"),{code:qrCode})}
+async function admin(){
+ const [ms,qd,as,ps]=await Promise.all([getDocs(collection(db,"members")),getDoc(doc(db,"settings","qr")),
+  getDocs(query(collection(db,"attendance"),where("date","==",today()))),
+  getDocs(query(collection(db,"payments"),where("date",">=",today().slice(0,8)+"01")))]);
+ members=ms.docs.map(x=>({id:x.id,...x.data()}));att=as.docs.map(x=>x.data()).sort((a,b)=>b.time.localeCompare(a.time));pays=ps.docs.map(x=>x.data());
+  try{reqs=(await getDocs(query(collection(db,"payreq"),where("status","==","pending")))).docs.map(x=>({id:x.id,...x.data()}))}catch(e){reqs=[]}
+ try{ADS=(await getDocs(query(collection(db,"ads"),orderBy("ts","desc"),limit(20)))).docs.map(x=>({id:x.id,...x.data()}))}catch(e){ADS=[]}
+ if(qd.exists())qrCode=qd.data().code;else await newQR();draw()}
+let reqs=[];const dueN=()=>members.filter(m=>diff(m.expiry)<=3).length+reqs.length;
+function draw(){document.body.classList.add("adm");
+ const sm=/^(http|data:)/.test(BRAND.logo)?`<img src="${BRAND.logo}">`:BRAND.logo;
+ A.innerHTML=`<div class="top"><a onclick="go('more')">${I("menu")}</a><div class="tl"><span>${sm}</span><b>${BRAND.name}</b></div><a onclick="go('home')" style="position:relative">${I("bell")}${dueN()?`<i class="bdgn">${dueN()}</i>`:""}</a></div><div id="v"></div><nav>${[["home","home","Home"],["mem","users","Members"],["qr","scan","QR"],["att","check","Aaj"],["more","grid","More"]].map(n=>`<a class="${view==n[0]?"on":""}${n[0]=="qr"?" ctr":""}" onclick="go('${n[0]}')"><span>${I(n[1],n[0]=="qr"?26:22)}</span>${n[0]=="qr"?"":n[2]}</a>`).join("")}</nav>`;show()}
+window.go=v=>{view=v;draw()};
+const stat=m=>{const d=diff(m.expiry);return`<span class="${d<0?"r":d<=3?"go":"o"}">${d<0?`Expired ${-d} din pehle`:`${d} din baaki`}</span>`};
+function show(){const v=$("#v");
+ if(view=="home"){const act=members.filter(m=>diff(m.expiry)>=0).length,rev=pays.reduce((a,p)=>a+(+p.amount||0),0),
+  due=members.filter(m=>diff(m.expiry)<=3).sort((a,b)=>a.expiry.localeCompare(b.expiry)).slice(0,8);
+  v.innerHTML=`<div class="ban"><h1>NO PAIN<br>NO GAIN</h1><button onclick="go('mem')">Members dekho ▶</button><div class="em">${I("dumbbell",110)}</div></div>
+  <div class="c row" style="justify-content:flex-start;gap:12px">${av("Admin")}<div style="flex:1"><div class="mu">${greet()}!</div><b style="font-size:17px">Welcome back, Admin 👋</b></div><span class="pill go">Admin</span></div>
+  ${reqs.length?`<div class="c row" onclick="go('pay')" style="border-color:var(--ad)"><b>💳 ${reqs.length} payment request pending</b><span class="vl">Dekho ▸</span></div>`:""}<div class="grid" style="margin-bottom:12px"><div class="s"><span class="ic">${I("check",24)}</span><span class="mu">Aaj aaye</span><b>${att.length}</b></div><div class="s"><span class="ic">${I("rupee",24)}</span><span class="mu">Is mahine kamai</span><b>₹${rev}</b></div><div class="s"><span class="ic">${I("dumbbell",24)}</span><span class="mu">Active</span><b class="o">${act}</b></div><div class="s"><span class="ic">${I("alert",24)}</span><span class="mu">Expired</span><b class="r">${members.length-act}</b></div></div>
+  <h3>Quick menu</h3><div class="tiles">${[["users","Members","go('mem')"],["card","Payments","go('pay')"],["check","Attendance","go('att')"],["mega","Offers","go('ads')"],["scan","QR code","go('qr')"],["bell","Reminder","rem()"]].map(t=>`<div class="tile" onclick="${t[2]}"><span class="ti">${I(t[0],22)}</span>${t[1]}</div>`).join("")}</div>
+  <div class="row"><h3 style="margin:18px 0 10px">Fee due / expired</h3><a class="vl" onclick="go('mem')">View all ▸</a></div>${due.map(m=>`<div class="c row"><div style="display:flex;gap:12px;align-items:center">${av(m.name)}<div><b>${m.name}</b><div class="mu">${stat(m)} · ₹${m.fee||0}</div></div></div><button class="ok" onclick="wa('${m.id}')">Remind</button></div>`).join("")||"<div class='c mu'>Sab theek hai 🎉</div>"}`}
+ if(view=="pay"){const tot=pays.reduce((a,p)=>a+(+p.amount||0),0);
+  v.innerHTML=`<div class="s" style="margin-bottom:12px"><span class="ic">${I("rupee",24)}</span><span class="mu">Is mahine kul kamai</span><b>₹${tot}</b></div>${reqs.length?`<h3>Pending requests (${reqs.length})</h3>`+reqs.map(r=>`<div class="c"><div class="row"><b>${r.name}</b><b class="go">₹${r.amount}</b></div><div class="mu">${r.months} mahina · UTR ${r.utr} · ${r.date}</div><button class="ok" onclick="apr('${r.id}')">✔ Approve</button><button class="g" onclick="rej('${r.id}')">Reject</button></div>`).join(""):""}<h3>Payments (${pays.length})</h3>${pays.slice().sort((a,b)=>b.date.localeCompare(a.date)).map(p=>`<div class="c row"><div><b>${p.name}</b><div class="mu">${p.date} · ${p.mode} · ${p.months} mahina</div></div><b class="o">₹${p.amount}</b></div>`).join("")||"<div class='c mu'>Abhi koi payment nahi</div>"}`}
+ if(view=="more"){v.innerHTML=`<h3>More</h3><div class="c"><button style="width:100%" onclick="go('ads')">📢 Offers &amp; Notices (members ko dikhao)</button><button class="g" style="width:100%" onclick="bk()">📥 Backup (CSV)</button><button class="g" style="width:100%" onclick="go('qr')">🔒 QR aur location settings</button><button class="g" style="width:100%" onclick="go('pay')">💳 Payments</button><button class="g" style="width:100%" onclick="logout()">Logout</button></div><div class="cen mu">${BRAND.name} · Admin panel</div>`}
+
+ if(view=="ads"){const nlv=ADS.filter(live).length;
+  v.innerHTML=`<div class="row"><h3 style="margin:0">Offers &amp; Notices</h3><span class="pill go">${nlv} live</span></div><div class="mu" style="margin:6px 0 10px">Yahan jo post karoge wo sab members ke app ke Home par dikhega.</div>
+  <div class="c"><b>Naya post</b><div id="ap" style="margin:12px 0"></div>
+  <input type="file" id="af2" accept="image/*" style="display:none" onchange="adImg(this.files[0]);this.value=''">
+  <button class="g" onclick="$('#af2').click()">${I("image",16).replace("margin:0 auto","margin:0 6px 0 0")} Photo</button><button class="g" onclick="AD.img='';adPrev()">Photo hatao</button>
+  <input id="at" placeholder="Title (jaise: Happy Diwali!)" maxlength="60" oninput="adPrev()">
+  <textarea id="ax" rows="3" maxlength="500" placeholder="Message likho... (offer, notice, wishes)" oninput="adPrev()"></textarea>
+  <select id="atg" onchange="adPrev()"><option value="offer">Offer</option><option value="fest">Festival</option><option value="new">New</option><option value="note">Notice</option></select>
+  <div class="mu" style="margin-top:8px">Card ka rang</div><div class="thm" id="thm">${Object.keys(TH).map(k=>`<i data-k="${k}" style="background:${TH[k][1]}" onclick="AD.theme='${k}';adPrev()"></i>`).join("")}</div>
+  <div class="mu" style="margin-top:8px">Last date (optional, uske baad apne aap hat jayega)</div><input id="au" type="date">
+  <label class="chk"><input type="checkbox" id="apop"> App khulte hi popup mein dikhao</label>
+  <button style="width:100%;margin-top:6px" onclick="postAd()">Post karo</button><div id="amsg" class="r" style="margin-top:6px"></div></div>
+  <h3>Aapke posts (${ADS.length})</h3>${ADS.map(a=>`<div class="c">${adCard(a,1)}<div class="row" style="margin-top:10px"><span class="pill ${a.on===false?"r":live(a)?"o":"go"}">${a.on===false?"Hidden":live(a)?"Live":"Expired"}${a.popup?" · Popup":""}</span><span class="mu">${a.until?"Till "+a.until:""}</span></div><div style="margin-top:8px"><button class="g" onclick="tgAd('${a.id}')">${a.on===false?"Show karo":"Hide karo"}</button><button class="g" onclick="edAd('${a.id}')">Edit text</button><button class="g" onclick="delAd('${a.id}')">Delete</button></div></div>`).join("")||"<div class='c mu'>Abhi koi post nahi. Upar se pehla post banao.</div>"}`;adPrev()}
+ if(view=="mem"){v.innerHTML=`<div class="row"><h3 style="margin:0">Members (${members.length})</h3><button onclick="tf()">+ Naya</button></div>
+  <div class="c" id="af" style="display:none;margin-top:10px"><input id="n" placeholder="Naam"><input id="ph" type="tel" placeholder="Phone (10 digit)"><input id="pn" inputmode="numeric" placeholder="PIN (4 digit)"><input id="fe" type="number" placeholder="Monthly fee ₹">
+  <select id="mo"><option value="1">1 mahina</option><option value="3">3 mahine</option><option value="6">6 mahine</option><option value="12">12 mahine</option></select><select id="md"><option>Cash</option><option>UPI</option></select><button onclick="addM()">Add member</button><div id="msg" class="r"></div></div>
+  <div class="t" id="tabs"></div><input id="sr" placeholder="🔍 Naam ya phone" value="${sq}" oninput="sq=this.value;list()"><div id="list"></div>`;list()}
+ if(view=="att"){v.innerHTML=`<h3>Aaj ki attendance (${att.length})</h3>${att.map(a=>`<div class="c row"><div style="display:flex;gap:12px;align-items:center">${av(a.name)}<b>${a.name}</b></div><span class="pill o">${a.time}</span></div>`).join("")||"<div class='c mu'>Abhi tak koi nahi aaya</div>"}`}
+ if(view=="qr"){v.innerHTML=`<div class="c cen" id="qrc"><h2 style="margin:0">${BRAND.name}</h2><div class="mu" style="margin-bottom:12px">Scan karo aur check-in karo</div><div id="qr" style="background:#fff;padding:18px;display:inline-block;border-radius:12px"></div></div>
+  <button onclick="print()">Print QR</button><button class="g" onclick="nq()">Naya QR banao</button><div class="c" style="margin-top:12px"><b>🔒 Ghar baithe check-in roko</b><div class="mu" style="margin:4px 0 8px">Gym mein khade hoke location set karo. Phir sirf gym ke 150m ke andar hi check-in hoga.</div><button class="ok" onclick="sg()">📍 Gym location set karo</button><button class="g" onclick="sgo()">Location check band</button><button class="g" onclick="lv()">${liveT?"⏹ Live QR band karo":"📺 Live QR mode"}</button><div class="mu">Live QR: kisi purane phone/TV par ye tab khula rakho, QR har 90 sec mein badalta hai (photo kaam nahi karegi).</div></div><button class="g" onclick="bk()">Backup (CSV)</button><button class="g" onclick="logout()">Logout</button>`;
+  new QRCode($("#qr"),{text:location.origin+location.pathname+"?c="+qrCode,width:260,height:260,correctLevel:QRCode.CorrectLevel.M})}}
+function list(){
+ const soon=members.filter(m=>diff(m.expiry)>=0&&diff(m.expiry)<=3).length;
+ $("#tabs").innerHTML=[["all","All"],["soon","Due soon ("+soon+")"],["red","🔴 Red list"]].map(t=>`<button class="${tab==t[0]?"":"g"}" onclick="tb('${t[0]}')">${t[1]}</button>`).join("");
+ const k=sq.trim().toLowerCase();
+ const f=members.filter(m=>(tab=="red"?diff(m.expiry)<0:tab=="soon"?diff(m.expiry)>=0&&diff(m.expiry)<=3:true)&&(!k||m.name.toLowerCase().includes(k)||m.phone.includes(k))).sort((a,b)=>a.expiry.localeCompare(b.expiry));
+ $("#list").innerHTML=f.map(m=>`<div class="c"><div class="row" style="justify-content:flex-start;gap:12px">${av(m.name)}<div style="flex:1"><b>${m.name}</b><div class="mu">${m.phone}</div></div><span class="pill ${diff(m.expiry)<0?"r":diff(m.expiry)<=3?"go":"o"}">${diff(m.expiry)<0?"Expired":diff(m.expiry)<=3?"Due soon":"Active"}</span></div><div class="bar"><i style="width:${Math.max(4,Math.min(100,diff(m.expiry)/30*100))}%;background:${diff(m.expiry)<0?"#ff6b6b":diff(m.expiry)<=3?"#f5b301":"#2ecc71"}"></i></div><div>${stat(m)} <span class="mu">· ${m.expiry} · ₹${m.fee||0} · 🔥${m.streak||0}</span></div>
+ <select id="pm${m.id}" style="width:auto;padding:8px;margin:8px 0 4px"><option>Cash</option><option>UPI</option></select><br>
+ <button class="ok" onclick="renew('${m.id}',1)">+1 mahina</button><button class="ok" onclick="renew('${m.id}',3)">+3 mahine</button><button class="g" onclick="wa('${m.id}')">WhatsApp</button><button class="g" onclick="ed('${m.id}')">Edit</button><button class="g" onclick="rp('${m.id}')">Reset PIN</button><button class="g" onclick="del('${m.id}')">Delete</button></div>`).join("")||"<p class='mu'>Koi member nahi</p>"}
+window.tb=t=>{tab=t;list()};
+window.adPrev=()=>{const a={id:"prev",title:$("#at").value||"Aapka title yahan",text:$("#ax").value||"Message yahan dikhega",img:AD.img,tag:$("#atg").value,theme:AD.theme};
+ $("#ap").innerHTML=adCard(a,1,false);document.querySelectorAll("#thm i").forEach(i=>i.classList.toggle("on",i.dataset.k==AD.theme))};
+window.adImg=async f=>{if(!f)return;const M=t=>$("#amsg").textContent=t;M("Photo ready ho rahi hai...");
+ try{const bm=await createImageBitmap(f);let w=900,q=.72,u;
+  for(let i=0;i<5;i++){const k=Math.min(1,w/Math.max(bm.width,bm.height)),c=document.createElement("canvas");c.width=Math.round(bm.width*k);c.height=Math.round(bm.height*k);c.getContext("2d").drawImage(bm,0,0,c.width,c.height);u=c.toDataURL("image/jpeg",q);if(u.length<260000)break;w-=150;q-=.06}
+  if(u.length>=700000)return M("Photo bahut badi hai, koi dusri photo chuno");
+  AD.img=u;M("");adPrev()}catch(e){M("Photo khul nahi payi, dusri photo try karo")}};
+window.postAd=async()=>{const M=t=>$("#amsg").textContent=t,t=$("#at").value.trim(),x=$("#ax").value.trim();
+ if(!t&&!x&&!AD.img)return M("Photo ya text daalo");
+ const o={title:t,text:x,img:AD.img||"",tag:$("#atg").value,theme:AD.theme,until:$("#au").value||"",popup:$("#apop").checked,on:true,ts:Date.now()};
+ M("Post ho raha hai...");
+ try{const r=await addDoc(collection(db,"ads"),o);ADS.unshift({id:r.id,...o});AD={img:"",theme:"gold"};show();alert("Post live ho gaya ✅ Sab members ko dikhega")}
+ catch(e){M(e.code=="permission-denied"?"Permission nahi mili. Firebase Firestore Rules mein 'ads' allow karo.":"Error: "+(e.code||e.message))}};
+window.tgAd=async id=>{const a=ADS.find(x=>x.id==id);a.on=a.on===false;try{await updateDoc(doc(db,"ads",id),{on:a.on})}catch(e){a.on=!a.on;alert("Error: "+(e.code||e.message))}show()};
+window.edAd=async id=>{const a=ADS.find(x=>x.id==id),t=prompt("Title",a.title||"");if(t===null)return;const x=prompt("Message",a.text||"");if(x===null)return;
+ try{await updateDoc(doc(db,"ads",id),{title:t.trim(),text:x.trim()});a.title=t.trim();a.text=x.trim()}catch(e){alert("Error: "+(e.code||e.message))}show()};
+window.delAd=async id=>{if(!confirm("Ye post delete karein? Members ke app se bhi hat jayega."))return;try{await deleteDoc(doc(db,"ads",id));ADS=ADS.filter(x=>x.id!=id)}catch(e){alert("Error: "+(e.code||e.message))}show()};
+
+const ERR={"auth/weak-password":"PIN kam se kam 4 digit ka ho","auth/network-request-failed":"Internet check karo","permission-denied":"Permission nahi hai, Firestore rules check karo"};
+window.addM=async()=>{const n=$("#n").value.trim(),ph=$("#ph").value.replace(/\D/g,"").slice(-10),pn=$("#pn").value.trim(),fe=+$("#fe").value||0,mo=+$("#mo").value,md=$("#md").value;
+ const M=t=>$("#msg").textContent=t;
+ if(!n||ph.length!=10||pn.length<4)return M("Naam, 10 digit phone aur 4+ digit PIN do");
+ if(members.some(m=>m.phone==ph))return M("Ye phone number pehle se hai");
+ M("Add ho raha hai...");
+ try{let uid;
+  try{uid=(await createUserWithEmailAndPassword(auth2,mail(ph),pw(pn))).user.uid}
+  catch(e){if(e.code=="auth/email-already-in-use")uid=(await signInWithEmailAndPassword(auth2,mail(ph),pw(pn))).user.uid;else throw e}
+  await signOut(auth2);
+  await setDoc(doc(db,"members",uid),{name:n,phone:ph,fee:fe,expiry:addD(today(),30*mo),joined:today(),streak:0,lastCheckin:""});
+  await addDoc(collection(db,"payments"),{uid,name:n,amount:fe*mo,mode:md,months:mo,date:today()});admin()}
+ catch(e){M(e.code=="auth/invalid-credential"?"Ye number pehle kisi aur PIN se bana tha. Firebase > Authentication se purana user delete karo.":ERR[e.code]||"Error: "+(e.code||e.message))}};
+window.renew=async(id,n)=>{const m=members.find(x=>x.id==id),md=$("#pm"+id).value;const base=diff(m.expiry)<0?today():m.expiry;
+ m.expiry=addD(base,30*n);await updateDoc(doc(db,"members",id),{expiry:m.expiry});
+ const p={uid:id,name:m.name,amount:(m.fee||0)*n,mode:md,months:n,date:today()};await addDoc(collection(db,"payments"),p);pays.push(p);list()};
+window.ed=async id=>{const m=members.find(x=>x.id==id);const n=prompt("Naam",m.name);if(n===null)return;const f=prompt("Monthly fee ₹",m.fee||0);if(f===null)return;
+ m.name=n.trim()||m.name;m.fee=+f||0;await updateDoc(doc(db,"members",id),{name:m.name,fee:m.fee});list()};
+window.del=async id=>{const m=members.find(x=>x.id==id);if(confirm(m.name+" ko delete karein?")){await deleteDoc(doc(db,"members",id));members=members.filter(x=>x.id!=id);list()}};
+window.nq=async()=>{if(confirm("Naya QR banane par purana print kiya QR band ho jayega. Pakka?")){await newQR();show()}};
+window.wa=id=>{const m=members.find(x=>x.id==id),d=diff(m.expiry);
+ const t=d<0?`Hi ${m.name}, aapki gym membership ${m.expiry} ko expire ho gayi hai. Fee ₹${m.fee} jama karein. - ${BRAND.name}`:`Hi ${m.name}, aapki gym membership ${m.expiry} ko expire hogi. Fee ₹${m.fee} time par jama karein. - ${BRAND.name}`;
+ open(`https://wa.me/${BRAND.cc}${m.phone}?text=${encodeURIComponent(t)}`)};
+window.tf=()=>{const f=$("#af");f.style.display=f.style.display=="none"?"block":"none"};
+let liveT=null;
+window.sg=async()=>{try{const p=await pos();await setDoc(doc(db,"settings","gym"),{lat:p.latitude,lng:p.longitude,r:150});alert("Gym location save ho gayi ✅ (150m ke andar check-in hoga)")}catch(e){alert("Location nahi mili. Phone ki location ON karo aur Allow dabao.")}};
+window.sgo=async()=>{await deleteDoc(doc(db,"settings","gym"));alert("Location check band ho gaya")};
+window.lv=async()=>{if(liveT){clearInterval(liveT);liveT=null;await newQR();return show()}
+ const rot=async()=>{const prev=qrCode;qrCode=Math.random().toString(36).slice(2,10);await setDoc(doc(db,"settings","qr"),{code:qrCode,prev,live:true});if(view=="qr")show()};
+ await rot();liveT=setInterval(rot,90000)};
+let rq=[];
+window.rem=()=>{if(!rq.length)rq=members.filter(m=>diff(m.expiry)<=3).map(m=>m.id);const id=rq.shift();if(id)wa(id);const b=$("#rb");if(b)b.textContent=rq.length?`Agla reminder (${rq.length} baaki) →`:"Sab ho gaye ✅"};
+window.bk=()=>{const r=["Naam,Phone,Fee,Expiry,Joined,Streak",...members.map(m=>[m.name,m.phone,m.fee||0,m.expiry,m.joined||"",m.streak||0].join(","))].join("\n");const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([r],{type:"text/csv"}));a.download="members.csv";a.click()};
+window.rp=async id=>{const m=members.find(x=>x.id==id),pn=prompt("Naya PIN (4 digit)");if(!pn)return;if(pn.length<4)return alert("PIN kam se kam 4 digit ka ho");
+ const rv=(m.rv||0)+1;if(rv>3)return alert("Reset limit (3) poori ho gayi. Firebase > Authentication se ye user delete karo aur naya member add karo.");
+ try{const c=await createUserWithEmailAndPassword(auth2,mail(m.phone,rv),pw(pn));await signOut(auth2);
+  const data={...m};delete data.id;await setDoc(doc(db,"members",c.user.uid),{...data,rv});await deleteDoc(doc(db,"members",id));alert("PIN reset ho gaya ✅");admin()}
+ catch(e){alert("Error: "+(e.code||e.message))}};
+window.cp=async()=>{const n=prompt("Naya PIN (4 digit)");if(!n)return;if(n.length<4)return alert("PIN kam se kam 4 digit ka ho");
+ try{await updatePassword(auth.currentUser,pw(n));alert("PIN badal gaya ✅")}catch(e){alert(e.code=="auth/requires-recent-login"?"Logout karke dobara login karo, phir PIN badlo":"Error: "+(e.code||e.message))}};
+window.apr=async id=>{const r=reqs.find(x=>x.id==id),m=r&&members.find(x=>x.id==r.uid);if(!m)return alert("Member nahi mila");
+ if(!confirm("₹"+r.amount+" UPI mein aaya? UTR "+r.utr+" apni UPI app mein check kar lo."))return;
+ try{const base=diff(m.expiry)<0?today():m.expiry;m.expiry=addD(base,30*r.months);await updateDoc(doc(db,"members",r.uid),{expiry:m.expiry});
+  const p={uid:r.uid,name:r.name,amount:r.amount,mode:"UPI",months:r.months,date:today()};await addDoc(collection(db,"payments"),p);pays.push(p);
+  await updateDoc(doc(db,"payreq",id),{status:"approved"});reqs=reqs.filter(x=>x.id!=id);draw()}catch(e){alert("Error: "+(e.code||e.message))}};
+window.rej=async id=>{if(!confirm("Ye request reject karein?"))return;try{await updateDoc(doc(db,"payreq",id),{status:"rejected"});reqs=reqs.filter(x=>x.id!=id);draw()}catch(e){alert("Error: "+(e.code||e.message))}};
+</script></body></html>
